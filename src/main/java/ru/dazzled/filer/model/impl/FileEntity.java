@@ -29,7 +29,7 @@ public class FileEntity implements FilerEntity {
         this.entityType = entityType;
         this.mimeType = mimeType;
         this.file = file;
-        this.properties = new HashMap<String, Object>();
+        this.properties = new HashMap<>();
         this.content = null;
     }
 

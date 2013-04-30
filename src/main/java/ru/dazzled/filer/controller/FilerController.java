@@ -1,7 +1,6 @@
 package ru.dazzled.filer.controller;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -11,7 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import ru.dazzled.filer.EntityManager;
 import ru.dazzled.filer.model.FilerEntity;
 import ru.dazzled.filer.model.FilerEntityType;
@@ -41,7 +39,7 @@ public class FilerController {
 
     @RequestMapping("/list/{type}")
     public String getEntities(@PathVariable FilerEntityType type, Model model) {
-        List<FilerEntity> list = new ArrayList<FilerEntity>();
+        List<FilerEntity> list = new ArrayList<>();
         list.addAll(entityManager.getEntities(type));
         Collections.sort(list, new EntityComparator());
         model.addAttribute("entities", list);

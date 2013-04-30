@@ -20,7 +20,7 @@ public class FileEntityManager implements EntityManager {
     private Map<String, FilerEntity> entities;
 
     private Set<FilerEntity> scanFolder(File path) {
-        Set<FilerEntity> result = new HashSet<FilerEntity>();
+        Set<FilerEntity> result = new HashSet<>();
         for (File file : path.listFiles()) {
             if (file.isDirectory()) {
                 result.addAll(scanFolder(file));
@@ -30,11 +30,15 @@ public class FileEntityManager implements EntityManager {
                 int n = name.lastIndexOf(".");
                 if (n > 0) {
                     final String ext = name.substring(n + 1).toUpperCase();
-                    if (ext.equals("PDF")) {
-                        result.add(new PdfEntity(file));
-                    }
-                    else {
-                        //
+                    switch (ext) {
+                        case "PDF":
+                            result.add(new PdfEntity(file));
+                            break;
+                        case "EPUB":
+                            result.add(new EpubEntity(file));
+                            break;
+                        default:
+                            break;
                     }
                 }
             }
@@ -44,7 +48,7 @@ public class FileEntityManager implements EntityManager {
 
     public FileEntityManager(URI uri) {
         Set<FilerEntity> rawEntities = scanFolder(new File(uri));
-        entities = new HashMap<String, FilerEntity>();
+        entities = new HashMap<>();
         for (FilerEntity entity : rawEntities) {
             entities.put(entity.getGuid(), entity);
         }
