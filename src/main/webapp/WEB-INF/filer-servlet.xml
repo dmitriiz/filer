@@ -33,7 +33,7 @@
 
     <bean id="rootUri"
           class="java.net.URI">
-        <constructor-arg type="java.lang.String" value="file:///Users/dmitriiz/Music/iTunes/iTunes%20Music/Books" />
+        <constructor-arg type="java.lang.String" value="file:///Users/dmitriiz/Library/Containers/com.apple.BKAgentService/data/Documents/iBooks/books" />
     </bean>
 
     <bean id="entityManager"
